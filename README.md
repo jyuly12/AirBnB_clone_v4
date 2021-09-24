@@ -11,9 +11,6 @@ In this verssion of AirBnB all the previos parts are joined [together](https://w
 - And the new Web dynamic!
 ![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/d2d06462824fab5846f3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210924T151035Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=536a03dacc929aa2d8d296fcc821a7362e361c4d45573198f02d12b4ad085243)
 
-Web dynamic 
-
-
 #### Functionalities of this command interpreter:
 * Create a new object (ex: a new User or a new Place)
 * Retrieve an object from a file, a database etc...

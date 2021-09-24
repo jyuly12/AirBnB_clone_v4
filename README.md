@@ -1,5 +1,18 @@
-# AirBnB Clone - The Console
-The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
+
+# AirBnB Clone - Web Dynamic
+
+In this verssion of AirBnB all the previos parts are joined [together](https://www.youtube.com/watch?v=m-cfupVumos):
+
+- The console
+- Web static
+- MySQL Storage
+- Web Templates
+- Restful API
+- And the new Web dynamic!
+![](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2018/6/d2d06462824fab5846f3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210924T151035Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=536a03dacc929aa2d8d296fcc821a7362e361c4d45573198f02d12b4ad085243)
+
+Web dynamic 
+
 
 #### Functionalities of this command interpreter:
 * Create a new object (ex: a new User or a new Place)
@@ -27,41 +40,75 @@ This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.
 * Run hbnb(interactively): `./console` and enter command
 * Run hbnb(non-interactively): `echo "<command>" | ./console.py`
 
-## File Descriptions
-[console.py](console.py) - the console contains the entry point of the command interpreter. 
+
+## Functionalities
+
+### The console
+
+[console.py](console.py) - the console contains the entry point of the command interpreter.
 List of commands this console current supports:
-* `EOF` - exits console 
+* `EOF` - exits console
 * `quit` - exits console
 * `<emptyline>` - overwrites default emptyline method and does nothing
 * `create` - Creates a new instance of`BaseModel`, saves it (to the JSON file) and prints the id
-* `destroy` - Deletes an instance based on the class name and id (save the change into the JSON file). 
+* `destroy` - Deletes an instance based on the class name and id (save the change into the JSON file).
 * `show` - Prints the string representation of an instance based on the class name and id.
-* `all` - Prints all string representation of all instances based or not on the class name. 
-* `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). 
+* `all` - Prints all string representation of all instances based or not on the class name.
+* `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
+* `_key_value_parser` - Creates a dictionary from a list of strings
 
-#### `models/` directory contains classes used for this project:
-[base_model.py](/models/base_model.py) - The BaseModel class from which future classes will be derived
+
+### Data Diagram
+
+The BaseModel includes the most of the functionality of the objects. This is the parent of (and inherits its properties to):
+* Amenities
+* Cities
+* Places
+* Reviews
+* States
+* Users
+
+This classes are defined in the directory [./models](./models/). 
+
+Functionality:
 * `def __init__(self, *args, **kwargs)` - Initialization of the base model
 * `def __str__(self)` - String representation of the BaseModel class
 * `def save(self)` - Updates the attribute `updated_at` with the current datetime
-* `def to_dict(self)` - returns a dictionary containing all keys/values of the instance
+* `def to_dict(self)` - Returns a dictionary containing all keys/values of the instance
+* `def delete(self)` - Delete the current instance from the storage
 
 Classes inherited from Base Model:
-* [amenity.py](/models/amenity.py)
-* [city.py](/models/city.py)
-* [place.py](/models/place.py)
-* [review.py](/models/review.py)
-* [state.py](/models/state.py)
-* [user.py](/models/user.py)
 
-#### `/models/engine` directory contains File Storage class that handles JASON serialization and deserialization :
-[file_storage.py](/models/engine/file_storage.py) - serializes instances to a JSON file & deserializes back to instances
-* `def all(self)` - returns the dictionary __objects
-* `def new(self, obj)` - sets in __objects the obj with key <obj class name>.id
-* `def save(self)` - serializes __objects to the JSON file (path: __file_path)
-* ` def reload(self)` -  deserializes the JSON file to __objects
 
-#### `/tests` directory contains all unit test cases for this project:
+![Diagram of dependencies](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2020/9/99e1a8f2be8c09d5ce5ac321e8cf39f0917f8db5.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210924T151035Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=4d8659b0cea54418dd8bc89bae9a929a66a38f854b15780a50d693c790107f5c)
+
+### Storage
+
+The data can be saved in a file with JSON format, as defined in [file_storage.py](/models/engine/file_storage.py)  or in a MySQL database as defined in [db_storage.py](/models/engine/db_storage.py). Both have the methods: 
+* `def __init__(self)` -  Create an instance
+* `def all(self)` - Returns the instances created
+* `def new(self, obj)` - Save an instance in the session
+* `def save(self)` - saves object in the json file / commit sesison changes in the database.
+* ` def reload(self)` -  deserializes the JSON file to __objects / reloads data from the database.
+
+### Web Static
+
+The HTML and CSS files that allows to show the static content of the project were developed on the folder [./web_static](./models/). 
+
+It includes a header with a logo, a dropdown menu to filter places using list of States and Cities, and a list of available Amenities, a search button,  and a section to show the results, a detailed view of the places, with it's name, prize, description, and amenities.
+![Web page preview](https://holbertonintranet.s3.amazonaws.com/uploads/medias/2020/9/f47a405fccad371100ff9665dae9b3a84a471e62.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUWMNL5ANN%2F20210924%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210924T154659Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=9df680b43f7acc6de08065b1cc5f87e7b34c0201f78ebafb7228ba8be96034a3)
+
+### Deployment
+The folder [./web_flask](./web_flask/) contains test to deploy a web page on a server. 
+
+### Web Dynamic
+
+The web_dynamic uses the web_flask files to deploy a web dynamic server on the folder [./web_dynamic](./web_dynamic/). It uses JQuery to show dynamic content using the API.
+
+### Testing
+
+Each class and functionality are tested with Unittest included in the [/tests](/tests) directory. Also, every file is tested to contain documentation and pass de PEP8 standard for python code.
+
 [/test_models/test_base_model.py](/tests/test_models/test_base_model.py) - Contains the TestBaseModel and TestBaseModelDocs classes
 TestBaseModelDocs class:
 * `def setUpClass(cls)`- Set up for the doc tests
@@ -151,14 +198,18 @@ EOF  all  create  destroy  help  quit  show  update
 ```
 
 ## Bugs
-No known bugs at this time. 
+No known bugs at this time.
 
 ## Authors
-Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
-Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)  
-Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)  
-David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
+Julieth Gonzalez [Github](https://github.com/jyuly12)  / [Twitter](https://twitter.com/jyuly12)
+Natalia Vera  [Github](https://github.com/Naveduran)  /  [Twitter](https://twitter.com/NaVeDuran1)
+Manuel Bedoya - [Github](https://github.com/ManuBedoya) / [Twitter](https://twitter.com/BedoyaManu98)
 
-Second part of Airbnb: Joann Vuong
+Based on previous versions of:
+Jhoan Zamora - [Github](https://github.com/jzamora5) / [Twitter](https://twitter.com/JhoanZamora10)
+Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
+David Ovalle - [Github](https://github.com/Nukemenonai) / [Twitter](https://twitter.com/disartDave)
+Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)
+
 ## License
-Public Domain. No copy write protection. 
+Public Domain. No copy write protection.

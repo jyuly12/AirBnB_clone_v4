@@ -1,14 +1,19 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    let list = []
+  const dict = {};
+  $('input[type=checkbox]').on('click', function () {
+    const amenityId = $(this).attr('data-id');
+    const amenityName = $(this).attr('data-name');
 
-    $("input[type=checkbox]").on( "click", function () {
-        let amenity = $(this).attr('data-id')
-        if (list.indexOf(amenity) == -1 ) {
-            list.push(amenity);
-        } else { // delete the id of the amenity
-            const index = list.indexOf(amenity);
-            list.splice(index, 1);
-        };
-        console.log(list)
+    if (dict[amenityName]) {
+      delete dict[amenityName];
+    } else { // delete the id of the amenity
+      dict[amenityName] = amenityId;
     }
-)});
+    let text = '';
+    for (let i = 0; Object.entries(dict)[i]; i++) {
+      if (i > 0) { text += ', '; }
+      text += Object.entries(dict)[i][0];
+    }
+    $('.amenities h4').text(text);
+  });
+});

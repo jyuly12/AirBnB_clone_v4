@@ -35,20 +35,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     success: function (data) {
       console.log(data);
       for (let i = 0; Object.entries(data)[i]; i++) {
-        const name = data[i].name;
-        const price = data[i].price_by_night;
-        const max = data[i].max_guest;
-        const rooms = data[i].number_rooms;
-        const bathrooms = data[i].number_bathrooms;
-        const description = data[i].description;
-        let text = '<article> <div class="title_box"><h2>' + name + '</h2><div class="price_by_night">$' + price +
-                    '</div></div><div class="information"><div class="max_guest">' + max + ' Guest';
-        if (max !== 1) { text += 's'; }
-        text += '</div><div class="number_rooms">' + rooms + ' Bedroom';
-        if (rooms !== 1) { text += 's'; }
-        text += '</div><div class="number_bathrooms">' + bathrooms + ' Bathroom';
-        if (bathrooms !== 1) { text += 's'; }
-        text += '</div></div><div class="description">' + description + '</div></article>';
+        let text = '<article> <div class="title_box"><h2>' + data[i].name + '</h2><div class="price_by_night">$' + data[i].price_by_night +
+                    '</div></div><div class="information"><div class="max_guest">' + data[i].max_guest + ' Guest';
+        if (data[i].max_guest !== 1) { text += 's'; }
+        text += '</div><div class="number_rooms">' + data[i].number_rooms + ' Bedroom';
+        if (data[i].number_rooms !== 1) { text += 's'; }
+        text += '</div><div class="number_bathrooms">' + data[i].number_bathrooms + ' Bathroom';
+        if (data[i].number_bathrooms !== 1) { text += 's'; }
+        text += '</div></div><div class="description">' + data[i].description + '</div></article>';
         $('.places').append(text);
       }
     }

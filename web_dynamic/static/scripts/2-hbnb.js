@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+
+  // check api status
+  //$.get('http://127.0.0.1:5001/api/v1/status/', function (data, status) {
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
+    console.log(status);
+    if (status === 'success') {
+      $('div#api_status').addClass('available');
+    } else { $('div#api_status').removeClass('available'); }
+  });
+
+  // show amenities list dynamicaly
   const dict = {};
   $('input[type=checkbox]').on('click', function () {
     const amenityId = $(this).attr('data-id');
@@ -15,14 +26,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
       text += Object.entries(dict)[i][0];
     }
     $('.amenities h4').text(text);
-  });
-});
-
-$(document).ready(function () {
-  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
-    console.log(status);
-    if (status === 'success') {
-      $('div#api_status').addClass('available');
-    } else { $('div#api_status').removeClass('available'); }
   });
 });

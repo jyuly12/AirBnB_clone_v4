@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   // check api status
-  $.get('http://127.0.0.1:5001/api/v1/status/', function (data, status) {
-  // $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
+  // $.get('http://127.0.0.1:5001/api/v1/status/', function (data, status) {
+  $.get('http://0.0.0.0:5001/api/v1/status/', function (data, status) {
     if (status === 'success') {
       $('div#api_status').addClass('available');
     } else { $('div#api_status').removeClass('available'); }
@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   $.ajax({
-    url: 'http://127.0.0.1:5001/api/v1/places_search/',
-    // url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    // url: 'http://127.0.0.1:5001/api/v1/places_search/',
+    url: 'http://0.0.0.0:5001/api/v1/places_search/',
     headers: { 'Content-Type': 'application/json' },
     method: 'POST',
     data: JSON.stringify({}),
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   $('button').on('click', function () {
     $.ajax({
-      url: 'http://127.0.0.1:5001/api/v1/places_search/',
-      // url: 'http://0.0.0.0:5001/api/v1/places_search/',
+      // url: 'http://127.0.0.1:5001/api/v1/places_search/',
+      url: 'http://0.0.0.0:5001/api/v1/places_search/',
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       data: JSON.stringify({ 'amenities': Object.values(dictAmenities), 'cities': Object.values(dictCities), 'states': Object.values(dictStates) }),
